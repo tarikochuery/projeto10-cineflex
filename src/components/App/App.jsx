@@ -1,15 +1,13 @@
-import { Footer } from "../Footer/Footer";
+import { Home } from "../../pages/Home";
+import { Routes } from "../../Routes";
 import { Header } from "../Header/Header";
-import { Seats } from "../Seats/Seats";
-import { Sessions } from "../Sessions/Sessions";
-import { Success } from "../Success/Success";
 import { StyledApp } from "./style";
 
 export function App() {
   return (
     <StyledApp>
       <Header />
-      <Success />
+      <Routes />
     </StyledApp>
   );
 }

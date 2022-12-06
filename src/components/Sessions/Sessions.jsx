@@ -1,6 +1,12 @@
 import { StyledSessions } from './style';
 import { Container } from '../../styles/Container';
 import { Session } from '../Session/Session';
+import { Footer } from '../Footer/Footer'
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+const BASE_URL = 'https://mock-api.driven.com.br/api/v8/cineflex/movies'
 
 const SESSIONS_LIST = {
   "id": 1,
@@ -133,12 +139,21 @@ const SESSIONS_LIST = {
 };
 
 export const Sessions = () => {
+  const { id } = useParams();
+  const [movieInfo, setMovieInfo] = useState()
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/${id}/showtimes`)
+    .then(res => setMovieInfo(res.data))
+  }, [id])
+
   return (
     <Container>
       <p>Selecione o horário</p>
       <StyledSessions>
-        {SESSIONS_LIST.days.map(session => <Session session={session} key={session.id} />)}
+        {movieInfo?.days.map(session => <Session session={session} key={session.id} />)}
       </StyledSessions>
+      {movieInfo && <Footer movieInfo={movieInfo}/>}
     </Container>
   );
 };

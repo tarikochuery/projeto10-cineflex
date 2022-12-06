@@ -8,7 +8,7 @@ export const Session = ({ session }) => {
     <StyledSession>
       <p>{weekday} - {date}</p>
       <div>
-        {showtimes.map(showtime => <Showtime showtime={showtime} />)}
+        {showtimes.map(showtime => <Showtime showtime={showtime} key={showtime.id} />)}
       </div>
     </StyledSession>
   );

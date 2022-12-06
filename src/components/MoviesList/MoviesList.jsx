@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container } from '../../styles/Container';
 import { Movie } from '../Movie/Movie';
 import { StyledHome } from './style';
@@ -9,10 +10,11 @@ export const MoviesList = ({movies}) => {
       <p>Selecione o Filme</p>
       <StyledHome>
         {movies.map(movie =>
+        <Link to={`/sessoes/${movie.id}`} key={movie.id}>
           <Movie
             movie={movie}
-            key={movie.id}
           />
+        </Link>
         )}
       </StyledHome>
     </Container>

@@ -89,5 +89,7 @@ export const StyledSeats = styled.div`
     border-radius: 3px;
     color: #fff;
     border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
   }
 `;

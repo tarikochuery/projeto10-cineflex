@@ -16,17 +16,26 @@ const AVAILABLE = {
   background: '#C3CFD9'
 };
 
-export const Seat = ({ seat }) => {
+let selected = false
+
+export const Seat = ({ seat, addSeat, removeSeat }) => {
   const { name, isAvailable } = seat;
   const [color, setColor] = useState(
     isAvailable ? AVAILABLE : UNAVAILABLE
   );
-  let selected = false
 
   const handleClick = () => {
-    if (!isAvailable) return;
+    if (!isAvailable) {
+      alert('Este assento não está disponível')
+      return
+    };
 
     setColor(selected ? AVAILABLE : SELECTED);
+    if (selected) {
+      removeSeat(name)
+    } else {
+      addSeat(name)
+    }
     selected = !selected
   };
   return (

@@ -8,6 +8,7 @@ export const StyledShowtime = styled.button`
   height: 4.3rem;
   font-size: 1.8rem;
   border: none;
+  cursor: pointer;
 
   display: flex;
   justify-content: center;

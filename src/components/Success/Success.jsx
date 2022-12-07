@@ -1,25 +1,29 @@
+import { useNavigate } from "react-router-dom";
 import { StyledSuccess } from "./style";
 
-export const Success = () => {
+export const Success = ({bookedSeatsInfo}) => {
+  const { bookedSeats, showtimeInfo } = bookedSeatsInfo
+  const {ids, name, cpf} = bookedSeats
+  const navigate = useNavigate()
+
   return (
     <StyledSuccess>
       <strong>Pedido feito com sucesso!</strong>
       <div className="info-container">
         <strong>Filme e Sessão</strong>
-        <p>Nome do Filme</p>
-        <p>Sessão do Filme</p>
+        <p>{showtimeInfo.movie.title}</p>
+        <p>{showtimeInfo.day.weekday} - {showtimeInfo.name}</p>
       </div>
       <div className="info-container">
         <strong>Ingressos</strong>
-        <p>Assento</p>
-        <p>Assento</p>
+        {ids.map(id => <p key={id}>Assento {id}</p>)}
       </div>
       <div className="info-container">
         <strong>Comprador</strong>
-        <p>Nome</p>
-        <p>CPF</p>
+        <p>Nome: {name}</p>
+        <p>CPF: {cpf}</p>
       </div>
-      <button>Voltar para Home</button>
+      <button onClick={() => navigate('/')}>Voltar para Home</button>
     </StyledSuccess>
   )
 }

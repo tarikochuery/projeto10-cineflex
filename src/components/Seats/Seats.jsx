@@ -9,32 +9,33 @@ import { StyledSeats } from "./style";
 const GET_URL = 'https://mock-api.driven.com.br/api/v8/cineflex/showtimes'
 const POST_URL = 'https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many'
 
-const bookSeats = async (body) => {
-    const res = await axios.post(POST_URL, body)
+const bookSeats = (body) => {
+    axios.post(POST_URL, body)
 }
 
-export const Seats = () => {
+export const Seats = ({setBookedSeatsInfo}) => {
     const { id } = useParams();
     const navigate = useNavigate()
     const [showtimeInfo, setShowtimeInfo] = useState()
     
-    const [body, setBody] = useState({name: '', cpf: '', ids: []})
+    const [bookedSeats, setBookedSeats] = useState({name: '', cpf: '', ids: []})
 
     const handleChange = (key, value) => {
-        setBody({...body, [key]: value})
+        setBookedSeats({...bookedSeats, [key]: value})
     }
 
     const addSeat = (id) => {
-        setBody({...body, ids: [...body.ids, id]})
+        setBookedSeats({...bookedSeats, ids: [...bookedSeats.ids, id]})
     }
 
     const removeSeat = (idRemoved) => {
-        setBody({...body, ids: body.ids.filter(id => id !== idRemoved)})
+        setBookedSeats({...bookedSeats, ids: bookedSeats.ids.filter(id => id !== idRemoved)})
     }
 
     const handleClick = () => {
-        bookSeats(body)
-        navigate('/')
+        bookSeats(bookedSeats)
+        setBookedSeatsInfo({bookedSeats, showtimeInfo})
+        navigate('/sucesso')
     }
 
     useEffect(() => {
@@ -73,11 +74,11 @@ export const Seats = () => {
                 <div className="form">
                     <div className="input">
                         <label htmlFor="name">Nome do Comprador</label>
-                        <input value={body.name} onChange={(e) => handleChange('name', e.target.value)} type="text" id="name" placeholder="Digite seu nome..." />
+                        <input value={bookedSeats.name} onChange={(e) => handleChange('name', e.target.value)} type="text" id="name" placeholder="Digite seu nome..." />
                     </div>
                     <div className="input">
                         <label htmlFor="cpf">CPF do Comprador</label>
-                        <input value={body.cpf} onChange={(e) => handleChange('cpf', e.target.value)} type="text" id="cpf" placeholder="Digite seu CPF..." />
+                        <input value={bookedSeats.cpf} onChange={(e) => handleChange('cpf', e.target.value)} type="text" id="cpf" placeholder="Digite seu CPF..." />
                     </div>
                 </div>
                 <button onClick={() => handleClick()}>Reservar assento(s)</button>

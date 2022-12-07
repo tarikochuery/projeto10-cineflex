@@ -37,5 +37,6 @@ export const StyledSuccess = styled.div`
     border: none;
     border-radius: 0.3rem;
     font-size: 1.8rem;
+    cursor: pointer;
   }
 `

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { redirect, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Container } from "../../styles/Container";
-import { BackArrow } from "../BackArrow/BackArrow";
+import { BuyerForm } from "../BuyerForm/BuyerForm";
 import { Footer } from "../Footer/Footer";
 import { Seat } from "../Seat/Seat";
 import { StyledSeats } from "./style";
@@ -19,11 +19,13 @@ export const Seats = ({ setBookedSeatsInfo }) => {
     const navigate = useNavigate();
     const [showtimeInfo, setShowtimeInfo] = useState();
 
-    const [bookedSeats, setBookedSeats] = useState({ name: '', cpf: '', ids: [] });
+    const [bookedSeats, setBookedSeats] = useState({ ids: [], compradores: [] });
 
-    const handleChange = (key, value) => {
-        setBookedSeats({ ...bookedSeats, [key]: value });
-    };
+    const isSeatSelected = id => bookedSeats.ids.includes(id)
+
+    const addBuyer = (seatInfo) => {
+        //TODO: Adicionar o objeto de comprador do componente BuyerForm ao array compradores no estado boookedSeats
+    }
 
     const addSeat = (id) => {
         setBookedSeats({ ...bookedSeats, ids: [...bookedSeats.ids, id] });
@@ -33,7 +35,7 @@ export const Seats = ({ setBookedSeatsInfo }) => {
         setBookedSeats({ ...bookedSeats, ids: bookedSeats.ids.filter(id => id !== idRemoved) });
     };
 
-    const handleClick = () => {
+    const handleConfirmButtonClick = () => {
         bookSeats(bookedSeats);
         setBookedSeatsInfo({ bookedSeats, showtimeInfo });
         navigate('/sucesso');
@@ -50,7 +52,7 @@ export const Seats = ({ setBookedSeatsInfo }) => {
             <p>Selecione o(s) assento(s)</p>
             <StyledSeats>
                 <div className="seats-list">
-                    {showtimeInfo?.seats.map(seat => <Seat seat={seat} removeSeat={removeSeat} addSeat={addSeat} key={seat.id} />)}
+                    {showtimeInfo?.seats.map(seat => <Seat isSeatSelected={isSeatSelected} seat={seat} removeSeat={removeSeat} addSeat={addSeat} key={seat.id} />)}
                 </div>
                 <div className="legends">
                     <div className="legend-container">
@@ -72,17 +74,8 @@ export const Seats = ({ setBookedSeatsInfo }) => {
                         <p>Indisponível</p>
                     </div>
                 </div>
-                <div className="form">
-                    <div className="input">
-                        <label htmlFor="name">Nome do Comprador</label>
-                        <input value={bookedSeats.name} onChange={(e) => handleChange('name', e.target.value)} type="text" id="name" placeholder="Digite seu nome..." />
-                    </div>
-                    <div className="input">
-                        <label htmlFor="cpf">CPF do Comprador</label>
-                        <input value={bookedSeats.cpf} onChange={(e) => handleChange('cpf', e.target.value)} type="text" id="cpf" placeholder="Digite seu CPF..." />
-                    </div>
-                </div>
-                <button onClick={() => handleClick()}>Reservar assento(s)</button>
+                {bookedSeats.ids.map(id => <BuyerForm key={id} id={id} />)}
+                <button onClick={() => handleConfirmButtonClick()}>Reservar assento(s)</button>
             </StyledSeats>
             {showtimeInfo && <Footer day={showtimeInfo.day} time={showtimeInfo.name} movieInfo={showtimeInfo.movie} />}
         </Container>

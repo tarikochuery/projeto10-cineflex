@@ -16,9 +16,7 @@ const AVAILABLE = {
   background: '#C3CFD9'
 };
 
-let selected = false
-
-export const Seat = ({ seat, addSeat, removeSeat }) => {
+export const Seat = ({ seat, addSeat, removeSeat, isSeatSelected }) => {
   const { name, isAvailable } = seat;
   const [color, setColor] = useState(
     isAvailable ? AVAILABLE : UNAVAILABLE
@@ -30,13 +28,13 @@ export const Seat = ({ seat, addSeat, removeSeat }) => {
       return
     };
 
-    setColor(selected ? AVAILABLE : SELECTED);
-    if (selected) {
+    setColor(isSeatSelected(name) ? AVAILABLE : SELECTED);
+    if (isSeatSelected(name)) {
       removeSeat(name)
     } else {
       addSeat(name)
     }
-    selected = !selected
+    
   };
   return (
     <StyledSeat onClick={handleClick} color={color}>

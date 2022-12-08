@@ -6,7 +6,6 @@ import { StyledApp } from "./style";
 export function App() {
   return (
     <StyledApp>
-      <Header />
       <Routes />
     </StyledApp>
   );

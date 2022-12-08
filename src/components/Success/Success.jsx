@@ -9,7 +9,6 @@ export const Success = ({ bookedSeatsInfo }) => {
 
   return (
     <StyledSuccess>
-      <BackArrow />
       <strong>Pedido feito com sucesso!</strong>
       <div className="info-container">
         <strong>Filme e Sessão</strong>

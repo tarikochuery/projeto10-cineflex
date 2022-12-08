@@ -20,7 +20,6 @@ export const Sessions = () => {
 
   return (
     <Container>
-      <BackArrow />
       <p>Selecione o horário</p>
       <StyledSessions>
         {movieInfo?.days.map(session => <Session session={session} key={session.id} />)}

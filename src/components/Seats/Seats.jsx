@@ -47,7 +47,6 @@ export const Seats = ({ setBookedSeatsInfo }) => {
 
     return (
         <Container>
-            <BackArrow />
             <p>Selecione o(s) assento(s)</p>
             <StyledSeats>
                 <div className="seats-list">

@@ -4,12 +4,14 @@ import { Success } from './components/Success/Success';
 import { Home } from './pages/Home';
 import { Seats } from './components/Seats/Seats';
 import { useState } from 'react';
+import { Header } from './components/Header/Header';
 
 export const Routes = () => {
   const [bookedSeatsInfo, setBookedSeatsInfo] = useState() 
 
   return (
     <Router>
+      <Header />
       <Switch>
         <Route path='/' element={<Home />} />
         <Route path='/sessoes/:id' element={<Sessions />} />

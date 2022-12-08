@@ -1,13 +1,15 @@
 import { useNavigate } from "react-router-dom";
+import { BackArrow } from "../BackArrow/BackArrow";
 import { StyledSuccess } from "./style";
 
-export const Success = ({bookedSeatsInfo}) => {
-  const { bookedSeats, showtimeInfo } = bookedSeatsInfo
-  const {ids, name, cpf} = bookedSeats
-  const navigate = useNavigate()
+export const Success = ({ bookedSeatsInfo }) => {
+  const { bookedSeats, showtimeInfo } = bookedSeatsInfo;
+  const { ids, name, cpf } = bookedSeats;
+  const navigate = useNavigate();
 
   return (
     <StyledSuccess>
+      <BackArrow />
       <strong>Pedido feito com sucesso!</strong>
       <div className="info-container">
         <strong>Filme e Sessão</strong>
@@ -23,7 +25,7 @@ export const Success = ({bookedSeatsInfo}) => {
         <p>Nome: {name}</p>
         <p>CPF: {cpf}</p>
       </div>
-      <button onClick={() => navigate('/')}>Voltar para Home</button>
+      <button className="go-home" onClick={() => navigate('/')}>Voltar para Home</button>
     </StyledSuccess>
-  )
-}
+  );
+};

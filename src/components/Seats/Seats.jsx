@@ -2,50 +2,52 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { redirect, useNavigate, useParams } from "react-router-dom";
 import { Container } from "../../styles/Container";
+import { BackArrow } from "../BackArrow/BackArrow";
 import { Footer } from "../Footer/Footer";
 import { Seat } from "../Seat/Seat";
 import { StyledSeats } from "./style";
 
-const GET_URL = 'https://mock-api.driven.com.br/api/v8/cineflex/showtimes'
-const POST_URL = 'https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many'
+const GET_URL = 'https://mock-api.driven.com.br/api/v8/cineflex/showtimes';
+const POST_URL = 'https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many';
 
 const bookSeats = (body) => {
-    axios.post(POST_URL, body)
-}
+    axios.post(POST_URL, body);
+};
 
-export const Seats = ({setBookedSeatsInfo}) => {
+export const Seats = ({ setBookedSeatsInfo }) => {
     const { id } = useParams();
-    const navigate = useNavigate()
-    const [showtimeInfo, setShowtimeInfo] = useState()
-    
-    const [bookedSeats, setBookedSeats] = useState({name: '', cpf: '', ids: []})
+    const navigate = useNavigate();
+    const [showtimeInfo, setShowtimeInfo] = useState();
+
+    const [bookedSeats, setBookedSeats] = useState({ name: '', cpf: '', ids: [] });
 
     const handleChange = (key, value) => {
-        setBookedSeats({...bookedSeats, [key]: value})
-    }
+        setBookedSeats({ ...bookedSeats, [key]: value });
+    };
 
     const addSeat = (id) => {
-        setBookedSeats({...bookedSeats, ids: [...bookedSeats.ids, id]})
-    }
+        setBookedSeats({ ...bookedSeats, ids: [...bookedSeats.ids, id] });
+    };
 
     const removeSeat = (idRemoved) => {
-        setBookedSeats({...bookedSeats, ids: bookedSeats.ids.filter(id => id !== idRemoved)})
-    }
+        setBookedSeats({ ...bookedSeats, ids: bookedSeats.ids.filter(id => id !== idRemoved) });
+    };
 
     const handleClick = () => {
-        bookSeats(bookedSeats)
-        setBookedSeatsInfo({bookedSeats, showtimeInfo})
-        navigate('/sucesso')
-    }
+        bookSeats(bookedSeats);
+        setBookedSeatsInfo({ bookedSeats, showtimeInfo });
+        navigate('/sucesso');
+    };
 
     useEffect(() => {
-      axios.get(`${GET_URL}/${id}/seats`)
-      .then(res => setShowtimeInfo(res.data))
-    }, [])
-    
+        axios.get(`${GET_URL}/${id}/seats`)
+            .then(res => setShowtimeInfo(res.data));
+    }, []);
+
 
     return (
         <Container>
+            <BackArrow />
             <p>Selecione o(s) assento(s)</p>
             <StyledSeats>
                 <div className="seats-list">

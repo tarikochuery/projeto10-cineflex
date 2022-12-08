@@ -28,7 +28,7 @@ export const StyledSuccess = styled.div`
     font-size: 2.2rem;
   }
 
-  button {
+  .go-home {
     width: 100%;
     max-width: 22.5rem;
     background-color: #E8833A;

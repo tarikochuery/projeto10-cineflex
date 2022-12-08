@@ -5,6 +5,7 @@ import { Footer } from '../Footer/Footer'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { BackArrow } from '../BackArrow/BackArrow';
 
 const BASE_URL = 'https://mock-api.driven.com.br/api/v8/cineflex/movies'
 
@@ -19,6 +20,7 @@ export const Sessions = () => {
 
   return (
     <Container>
+      <BackArrow />
       <p>Selecione o horário</p>
       <StyledSessions>
         {movieInfo?.days.map(session => <Session session={session} key={session.id} />)}

@@ -94,7 +94,7 @@ export const Seats = ({ setBookedSeatsInfo }) => {
                             seatInfo={bookedSeats.compradores[index]}
                         />
                     )}
-                    <button type='submit'>Reservar assento(s)</button>
+                    <button data-test='book-seat-btn' type='submit'>Reservar assento(s)</button>
                 </form>
             </StyledSeats>
             {showtimeInfo && <Footer day={showtimeInfo.day} time={showtimeInfo.name} movieInfo={showtimeInfo.movie} />}

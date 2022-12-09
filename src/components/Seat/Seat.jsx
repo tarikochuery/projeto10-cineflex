@@ -40,7 +40,7 @@ export const Seat = ({ seat, addSeat, removeSeat, isSeatSelected }) => {
     
   };
   return (
-    <StyledSeat onClick={handleClick} color={color}>
+    <StyledSeat data-test='seat' onClick={handleClick} color={color}>
       {name}
     </StyledSeat>
   );

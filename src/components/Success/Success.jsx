@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { StyledSuccess } from "./style";
 
@@ -11,16 +10,16 @@ export const Success = ({ bookedSeatsInfo }) => {
     return (
       <StyledSuccess>
         <strong>Pedido feito com sucesso!</strong>
-        <div className="info-container">
+        <div data-test='movie-info' className="info-container">
           <strong>Filme e Sessão</strong>
           <p>{showtimeInfo.movie.title}</p>
           <p>{showtimeInfo.day.weekday} - {showtimeInfo.name}</p>
         </div>
-        <div className="info-container">
+        <div data-test='seats-info' className="info-container">
           <strong>Ingressos</strong>
           {compradores.map(comprador => <p key={comprador.idAssento}>Assento {comprador.idAssento}</p>)}
         </div>
-        <div className="info-container">
+        <div data-test='client-info' className="info-container">
           <strong>Comprador(es)</strong>
           {compradores.map(comprador =>
             <div key={comprador.idAssento}>
@@ -29,7 +28,7 @@ export const Success = ({ bookedSeatsInfo }) => {
             </div>
           )}
         </div>
-        <button className="go-home" onClick={() => navigate('/')}>Voltar para Home</button>
+        <button data-test='go-home-btn' className="go-home" onClick={() => navigate('/')}>Voltar para Home</button>
       </StyledSuccess>
     );
   } catch (error) {

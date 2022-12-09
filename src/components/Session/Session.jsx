@@ -5,7 +5,7 @@ import { StyledSession } from './style';
 export const Session = ({ session }) => {
   const { weekday, date, showtimes } = session;
   return (
-    <StyledSession>
+    <StyledSession data-test='movie-day'>
       <p>{weekday} - {date}</p>
       <div>
         {showtimes.map(showtime => <Showtime showtime={showtime} key={showtime.id} />)}

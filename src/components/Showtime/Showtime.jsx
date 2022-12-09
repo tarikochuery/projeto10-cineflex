@@ -4,7 +4,7 @@ import { StyledShowtime } from "./style";
 export const Showtime = ({ showtime }) => {
   const { name, id } = showtime;
   return (
-    <Link to={`/assentos/${id}`}>
+    <Link data-test='showtime' to={`/assentos/${id}`}>
       <StyledShowtime>
         <p>{name}</p>
       </StyledShowtime>

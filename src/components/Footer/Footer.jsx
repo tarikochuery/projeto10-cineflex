@@ -4,7 +4,7 @@ import { StyledFooter } from './style';
 export const Footer = ({ movieInfo, day, time }) => {
   const { title } = movieInfo;
   return (
-    <StyledFooter>
+    <StyledFooter data-test='footer'>
       <Movie movie={movieInfo} size='s' />
       <div>
         <p>{title}</p>

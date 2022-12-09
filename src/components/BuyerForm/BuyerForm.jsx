@@ -13,6 +13,7 @@ export const BuyerForm = ({ id, addBuyer, seatInfo }) => {
       <div className="input">
         <label htmlFor="name">Nome do Comprador</label>
         <input
+          data-test='client-name'
           value={seatInfo.nome}
           onChange={e => handleChange('nome', e.target.value)} 
           type="text" 
@@ -23,7 +24,8 @@ export const BuyerForm = ({ id, addBuyer, seatInfo }) => {
       </div>
       <div className="input">
         <label htmlFor="cpf">CPF do Comprador</label>
-        <input 
+        <input
+          data-test='client-cpf'
           value={seatInfo.cpf} 
           onChange={e => handleChange('cpf', e.target.value)} 
           type="text" 

@@ -8,7 +8,7 @@ export const BackArrow = () => {
     navigate(-1)
   }
   return (
-    <StyledBackArrow onClick={goBack}>
+    <StyledBackArrow data-test='go-home-header-btn' onClick={goBack}>
       <ArrowBackOutline 
         color={'#000000'}
         width={'100%'}

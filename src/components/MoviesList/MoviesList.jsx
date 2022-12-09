@@ -10,7 +10,7 @@ export const MoviesList = ({movies}) => {
       <p>Selecione o Filme</p>
       <StyledHome>
         {movies.map(movie =>
-        <Link to={`/sessoes/${movie.id}`} key={movie.id}>
+        <Link to={`/sessoes/${movie.id}`} data-test='movie' key={movie.id}>
           <Movie
             movie={movie}
           />

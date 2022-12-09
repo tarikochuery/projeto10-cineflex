@@ -28,11 +28,14 @@ export const Seat = ({ seat, addSeat, removeSeat, isSeatSelected }) => {
       return
     };
 
-    setColor(isSeatSelected(name) ? AVAILABLE : SELECTED);
     if (isSeatSelected(name)) {
-      removeSeat(name)
+      if (window.confirm('Deseja realmente remover esse assento e apagar todos os dados?')){
+        removeSeat(name)
+        setColor(AVAILABLE)
+      }
     } else {
       addSeat(name)
+      setColor(SELECTED)
     }
     
   };

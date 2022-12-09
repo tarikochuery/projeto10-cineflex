@@ -53,6 +53,15 @@ export const StyledSeats = styled.div`
     border: 1px solid #0E7D71;
   }
 
+  form {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
   button {
     width: 22.5rem;
     height: 4.2rem;

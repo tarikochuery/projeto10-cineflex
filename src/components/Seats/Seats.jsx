@@ -20,22 +20,33 @@ export const Seats = ({ setBookedSeatsInfo }) => {
     const [showtimeInfo, setShowtimeInfo] = useState();
 
     const [bookedSeats, setBookedSeats] = useState({ ids: [], compradores: [] });
+    const isSeatSelected = id => bookedSeats.ids.includes(id);
 
-    const isSeatSelected = id => bookedSeats.ids.includes(id)
-
-    const addBuyer = (seatInfo) => {
-        //TODO: Adicionar o objeto de comprador do componente BuyerForm ao array compradores no estado boookedSeats
-    }
+    const addBuyer = (id, key, value) => {
+        const [seatInfo] = bookedSeats.compradores.filter(comprador => comprador.idAssento === id);
+        seatInfo[key] = value;
+        const newCompradores = bookedSeats.compradores.map(comprador => {
+            if (comprador.idAssento === id) return seatInfo;
+            return comprador;
+        });
+        setBookedSeats({ ...bookedSeats, compradores: newCompradores });
+    };
 
     const addSeat = (id) => {
-        setBookedSeats({ ...bookedSeats, ids: [...bookedSeats.ids, id] });
+        setBookedSeats({ compradores: [...bookedSeats.compradores, { idAssento: id, nome: '', cpf: '' }], ids: [...bookedSeats.ids, id] });
     };
 
     const removeSeat = (idRemoved) => {
-        setBookedSeats({ ...bookedSeats, ids: bookedSeats.ids.filter(id => id !== idRemoved) });
+        setBookedSeats({
+            ids: bookedSeats.ids.filter(id => id !== idRemoved),
+            compradores: bookedSeats.compradores.filter(({ idAssento }) => idAssento !== idRemoved)
+        });
+
     };
 
-    const handleConfirmButtonClick = () => {
+    const handleConfirmButtonClick = (e) => {
+        e.preventDefault()
+        if (bookedSeats.ids.length === 0) return
         bookSeats(bookedSeats);
         setBookedSeatsInfo({ bookedSeats, showtimeInfo });
         navigate('/sucesso');
@@ -74,8 +85,17 @@ export const Seats = ({ setBookedSeatsInfo }) => {
                         <p>Indisponível</p>
                     </div>
                 </div>
-                {bookedSeats.ids.map(id => <BuyerForm key={id} id={id} />)}
-                <button onClick={() => handleConfirmButtonClick()}>Reservar assento(s)</button>
+                <form onSubmit={handleConfirmButtonClick}>
+                    {bookedSeats.ids.map((id, index) =>
+                        <BuyerForm
+                            key={id}
+                            id={id}
+                            addBuyer={addBuyer}
+                            seatInfo={bookedSeats.compradores[index]}
+                        />
+                    )}
+                    <button type='submit'>Reservar assento(s)</button>
+                </form>
             </StyledSeats>
             {showtimeInfo && <Footer day={showtimeInfo.day} time={showtimeInfo.name} movieInfo={showtimeInfo.movie} />}
         </Container>

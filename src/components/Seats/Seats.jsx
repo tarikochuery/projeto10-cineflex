@@ -10,9 +10,6 @@ import { StyledSeats } from "./style";
 const GET_URL = 'https://mock-api.driven.com.br/api/v8/cineflex/showtimes';
 const POST_URL = 'https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many';
 
-const bookSeats = (body) => {
-    axios.post(POST_URL, body);
-};
 
 export const Seats = ({ setBookedSeatsInfo }) => {
     const { id } = useParams();
@@ -44,10 +41,15 @@ export const Seats = ({ setBookedSeatsInfo }) => {
 
     };
 
-    const handleConfirmButtonClick = (e) => {
+    const bookSeats = async (body) => {
+        const res = await axios.post(POST_URL, body);
+        console.log(res)
+    };
+
+    const handleConfirmButtonClick = async (e) => {
         e.preventDefault()
         if (bookedSeats.ids.length === 0) return
-        bookSeats(bookedSeats);
+        await bookSeats(bookedSeats);
         setBookedSeatsInfo({ bookedSeats, showtimeInfo });
         navigate('/sucesso');
     };

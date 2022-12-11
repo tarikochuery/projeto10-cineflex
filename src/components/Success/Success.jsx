@@ -15,11 +15,11 @@ export const Success = ({ bookedSeatsInfo }) => {
         <div data-test='movie-info' className="info-container">
           <strong>Filme e Sessão</strong>
           <p>{showtimeInfo.movie.title}</p>
-          <p>{showtimeInfo.day.weekday} - {showtimeInfo.name}</p>
+          <p>{showtimeInfo.day.date} - {showtimeInfo.name}</p>
         </div>
         <div data-test='seats-info' className="info-container">
           <strong>Ingressos</strong>
-          {compradores.map(comprador => <p key={comprador.idAssento}>Assento {comprador.idAssento}</p>)}
+          {compradores.map(comprador => <p key={comprador.idAssento}>Assento {comprador.seatNumber}</p>)}
         </div>
         <div data-test='client-info' className="info-container">
           <strong>Comprador(es)</strong>

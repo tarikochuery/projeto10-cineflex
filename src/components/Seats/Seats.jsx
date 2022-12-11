@@ -17,6 +17,8 @@ export const Seats = ({ setBookedSeatsInfo }) => {
     const [showtimeInfo, setShowtimeInfo] = useState();
 
     const [bookedSeats, setBookedSeats] = useState({ ids: [], compradores: [] });
+    console.log(bookedSeats)
+
     const isSeatSelected = id => bookedSeats.ids.includes(id);
 
     const addBuyer = (id, key, value) => {
@@ -29,8 +31,8 @@ export const Seats = ({ setBookedSeatsInfo }) => {
         setBookedSeats({ ...bookedSeats, compradores: newCompradores });
     };
 
-    const addSeat = (id) => {
-        setBookedSeats({ compradores: [...bookedSeats.compradores, { idAssento: id, nome: '', cpf: '' }], ids: [...bookedSeats.ids, id] });
+    const addSeat = (id, seatNumber) => {
+        setBookedSeats({ compradores: [...bookedSeats.compradores, { idAssento: id, nome: '', cpf: '', seatNumber }], ids: [...bookedSeats.ids, id] });
     };
 
     const removeSeat = (idRemoved) => {
@@ -42,14 +44,15 @@ export const Seats = ({ setBookedSeatsInfo }) => {
     };
 
     const bookSeats = async (body) => {
-        const res = await axios.post(POST_URL, body);
-        console.log(res)
+        await axios.post(POST_URL, body);
     };
 
     const handleConfirmButtonClick = async (e) => {
-        e.preventDefault()
-        if (bookedSeats.ids.length === 0) return
-        await bookSeats(bookedSeats);
+        e.preventDefault();
+        if (bookedSeats.ids.length === 0) return;
+        const bodyRequestBookedSeatsCompradores = bookedSeats.compradores.map(comprador => ({idAssento: comprador.idAssento, nome: comprador.nome, cpf:comprador.cpf}));
+        await bookSeats({ ...bookedSeats, compradores: bodyRequestBookedSeatsCompradores });
+        console.log(bookedSeats)
         setBookedSeatsInfo({ bookedSeats, showtimeInfo });
         navigate('/sucesso');
     };

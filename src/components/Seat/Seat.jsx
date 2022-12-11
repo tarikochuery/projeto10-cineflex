@@ -17,7 +17,7 @@ const AVAILABLE = {
 };
 
 export const Seat = ({ seat, addSeat, removeSeat, isSeatSelected }) => {
-  const { name, isAvailable } = seat;
+  const { name, isAvailable, id } = seat;
   const [color, setColor] = useState(
     isAvailable ? AVAILABLE : UNAVAILABLE
   );
@@ -30,11 +30,11 @@ export const Seat = ({ seat, addSeat, removeSeat, isSeatSelected }) => {
 
     if (isSeatSelected(name)) {
       if (window.confirm('Deseja realmente remover esse assento e apagar todos os dados?')){
-        removeSeat(name)
+        removeSeat(id)
         setColor(AVAILABLE)
       }
     } else {
-      addSeat(name)
+      addSeat(id)
       setColor(SELECTED)
     }
     

@@ -3,10 +3,12 @@ import { StyledSuccess } from "./style";
 
 export const Success = ({ bookedSeatsInfo }) => {
   const navigate = useNavigate();
-  try {
+
+
+
+  if (bookedSeatsInfo) {
     const { bookedSeats, showtimeInfo } = bookedSeatsInfo;
     const { compradores } = bookedSeats;
-
     return (
       <StyledSuccess>
         <strong>Pedido feito com sucesso!</strong>
@@ -31,8 +33,8 @@ export const Success = ({ bookedSeatsInfo }) => {
         <button data-test='go-home-btn' className="go-home" onClick={() => navigate('/')}>Voltar para Home</button>
       </StyledSuccess>
     );
-  } catch (error) {
-    return <h1>Página não encontrada - 404</h1>
-  }
+  };
+
+  return (<h1>Página não encontrada - 404</h1>);
 
 };
